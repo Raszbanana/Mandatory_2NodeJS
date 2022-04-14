@@ -45,11 +45,11 @@ itemsRouter.patch('/api/items/:id', async (req, res) => {
 });
 
 itemsRouter.delete('/api/items/:id', async (req, res) => {
-    const id = req.params.id;
+  const id = req.params.id;
 
-    const { changes } = await db.run(`DELETE FROM items WHERE id = ${id}`);
+  const { changes } = await db.run(`DELETE FROM items WHERE id = ${id}`);
 
-    res.send({ rowsAffected: changes });
-})
+  res.send({ rowsAffected: changes });
+});
 
 export default itemsRouter;
