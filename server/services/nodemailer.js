@@ -1,12 +1,14 @@
+
 import nodemailer from 'nodemailer';
 import { google } from 'googleapis';
+
 
 const CLIENT_ID =
   '163317577937-is6f9om56to5rqmgoma82ip4u08i1h3m.apps.googleusercontent.com';
 const CLIENT_SECRET = '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';
 const REDIRECT_URI = 'https://developers.google.com/oauthplayground';
 const REFRESH_TOKEN =
-'1//04zrO4hgnPU5VCgYIARAAGAQSNwF-L9Ir7-DscwIjtnir8xzl7RZbNLcYrXpjzAtZQYLdZ4KEy0h2xJb5t3fzyJjoRU_TcAv9Bpc';
+'1//04lEaPJLf1DF0CgYIARAAGAQSNwF-L9Ir8C22TM8hN-fOi20kbdNbH9JHCuH-P-fep7NStStoMF-5Mt8-637WrT8n0x8u1JousTw';
 
 const oAuth2Client = new google.auth.OAuth2(
   CLIENT_ID,
@@ -14,13 +16,14 @@ const oAuth2Client = new google.auth.OAuth2(
   REDIRECT_URI
 );
 oAuth2Client.setCredentials({ refreshToken: REFRESH_TOKEN });
-// console.log(oAuth2Client);
-// console.log(oAuth2Client.getAccessToken())
 
 async function sendMail() {
   try {
+    // TO DO, fix fetching accessToken, for some reason i cannot get the access token,
+    // but everything works if i hard code it in?
     // const access = await oAuth2Client.getAccessToken();
-    const access = 'ya29.A0ARrdaM_WWktuO20WEhcOIXl_2N5t6Sl51E5339qg7aSHX9BTi0P8Yx-dm7sCgD7VVnBE8NLUBAikJzCuRD0HUyjXy0ZM0uGbnedN5WkHkTwWU9Kf5Ng_DrpMCsWu3XqMAzrSTZTnGzOiwUZBzP81GokLGlMn'
+
+    const access = 'ya29.A0ARrdaM-4RL0yNjEwP4ocXOmXPIJeU_Gud5DAxCGs975jMmBLEetqomfbYEM36VjfQKYs04-2BVTwhNPp7Es-96nQU5-6LYFWT0uknoUf3rMXKRstMrpzJQ1bgyPGwitEn9vt4w_YnLh7VfMWoJnSNj5T6E49'
     const transport = nodemailer.createTransport({
       service: 'gmail',
       auth: {
