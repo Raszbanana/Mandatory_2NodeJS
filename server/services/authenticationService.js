@@ -8,7 +8,6 @@ function verifyLogin(req, res, next) {
   db.get(`SELECT * FROM users WHERE email = ${email}`)
     .then((user) => {
       const userPass = req.body.password;
-      console.log(user);
       const userHash = user.hashedPassword;
 
       bcrypt.compare(userPass, userHash, function (err, result) {
