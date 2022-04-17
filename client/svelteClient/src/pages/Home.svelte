@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { Column, Table } from 'sveltestrap';
-
+  import { Column, Table, Col, Row  } from 'sveltestrap';
+  import { Card, CardBody, CardHeader, CardTitle } from 'sveltestrap';
+  import { FormGroup,Input, Label } from 'sveltestrap';
   const ROWS = [
     {
       first: 'Rufus',
@@ -65,8 +66,27 @@
   ];
 </script>
 
+<div class="card-container">
+  <Card>
+
+    <CardHeader>
+      <CardTitle>Search our inventory!</CardTitle>
+    </CardHeader>
+    <CardBody>
+      <FormGroup>
+        <Label for="exampleSearch">What do you need?</Label>
+        <Input
+          type="search"
+          name="search"
+          id="exampleSearch"
+          placeholder="A new KEA-Mug for my favorite teacher"
+        />
+      </FormGroup>
+    </CardBody>
+  </Card>
+</div>
 <div class="table-container">
-  <Table  hover dark striped rows={ROWS} let:row>
+  <Table dark striped rows={ROWS} let:row>
     <Column header="itemName" width="6rem">
       {row.first}
     </Column>
@@ -74,16 +94,22 @@
       {row.last}
     </Column>
     <Column header="Price" width="2rem" class="text-right">
-        {row.dob.toDateString()}
-      </Column>
+      {row.dob.toDateString()}
+    </Column>
   </Table>
 </div>
 
 <style>
   .table-container {
-    margin-top: 3.5em;
-    width: 75%;
+    margin-top: 0em;
+    width: 85%;
     margin-left: auto;
   }
-  
+
+  .card-container {
+    margin-top: 1%;
+    width: 85%;
+    margin-left: auto;
+    background-color: #233d4d;
+  }
 </style>

@@ -70,12 +70,13 @@ button:focus {
 
 }
 
-.table-striped>tbody>tr:nth-of-type(odd):hover {
+/* .table-striped>tbody>tr:nth-of-type(odd):hover {
 	--bs-table-accent-bg: #373b3e;
-}
+} */
 
 .table-dark {
 	--bs-table-bg: #2bdfd55c;
+	--bs-table-hover-bg: black;;
 
 }
 
@@ -87,4 +88,21 @@ button:focus {
 	padding-right: 0px;
 	padding-left: 0px;
 }
+
+.modal-content {
+	background-color: #29998C;
+	/* color: white; */
+}
+
+.card-header:first-child {
+	background-color: #2a695a;
+	color: white;
+	border-left-style: double;
+    border-radius: 13px;
+}
+
+/* .form-control {
+	opacity: 0.9;
+
+} */
 

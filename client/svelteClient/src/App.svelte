@@ -1,6 +1,6 @@
 <script>
   import NavBar from './components/navbar/NavBar.svelte';
-  import Categories from './pages/Categories.svelte'
+  import Categories from './pages/Categories.svelte';
   import Home from './pages/Home.svelte';
   import { Container } from 'sveltestrap';
   import Router from 'svelte-spa-router';
@@ -10,12 +10,13 @@
 
 <Container fluid>
   <NavBar />
-  
-<Router routes={{
-  '/': Home,
-  '/categories': Categories,
 
-}}/>
+  <Router
+    routes={{
+      '/': Home,
+      '/categories': Categories,
+    }}
+  />
 </Container>
 
 <style>
