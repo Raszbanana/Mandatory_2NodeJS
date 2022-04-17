@@ -97,12 +97,27 @@ button:focus {
 .card-header:first-child {
 	background-color: #2a695a;
 	color: white;
-	border-left-style: double;
-    border-radius: 13px;
+
 }
 
-/* .form-control {
-	opacity: 0.9;
+.btn-primary {
+	background-color: #2a695a;
+	font-size: 19px;
+	color: white;
+	border-radius: 30px;
+	margin-top: 0.5em;
+	margin-left: 60px;
+	border-color: #2a695a;
+	text-shadow: 2px 2px #000000;
+	transition-duration: 0.4s;
+}
 
-} */
+.btn-primary:hover {
+	background-color: #29998c;
+}
+
+.card-body {
+	color: white;
+	background-color: #233d4d;
+}
 

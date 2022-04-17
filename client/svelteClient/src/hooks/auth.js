@@ -1,5 +1,4 @@
 async function verifyUser(email, password) {
-  console.log(email, password)
   fetch('http://localhost:3000/api/login', {
     method: 'POST',
     body: JSON.stringify({
@@ -12,10 +11,11 @@ async function verifyUser(email, password) {
   })
     .then((response) => response.json())
     .then((json) => {
-      console.log(json)
-      if (!json.token) {
-        console.log('Invalid credentials');
+      if (!json.token) {  
+        console.log(json)
+
       } else {
+        console.log(json.auth)
         localStorage.setItem('token', json.token);
         const token = localStorage.getItem('token');
         console.log(token)

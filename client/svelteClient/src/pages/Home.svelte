@@ -1,103 +1,98 @@
 <script lang="ts">
-  import { Column, Table, Col, Row  } from 'sveltestrap';
-  import { Card, CardBody, CardHeader, CardTitle } from 'sveltestrap';
-  import { FormGroup,Input, Label } from 'sveltestrap';
-  const ROWS = [
-    {
-      first: 'Rufus',
-      last: 'Sarsparilla',
-      email: 'rufus.sarsparilla@example.com',
-      dob: new Date(1968, 6, 15),
-    },
-    {
-      first: 'Albert',
-      last: 'Armadillo',
-      email: 'albert.armadillo@example.com',
-      dob: new Date(1972, 7, 17),
-    },
-    {
-      first: 'Arron',
-      last: 'Douglas',
-      email: 'arron.douglas@example.com',
-      dob: new Date(1982, 4, 1),
-    },
-    {
-      first: 'Reginald',
-      last: 'Rhodes',
-      email: 'reginald.rhodes@example.com',
-      dob: new Date(1968, 8, 14),
-    },
-    {
-      first: 'Jimmy',
-      last: 'Mendoza',
-      email: 'jimmy.mendoza@example.com',
-      dob: new Date(1964, 1, 1),
-    },
-    {
-      first: 'Georgia',
-      last: 'Montgomery',
-      email: 'georgia.montgomery@example.com',
-      dob: new Date(1960, 6, 4),
-    },
-    {
-      first: 'Serenity',
-      last: 'Thomas',
-      email: 'serenity.thomas@example.com',
-      dob: new Date(1973, 0, 11),
-    },
-    {
-      first: 'Tonya',
-      last: 'Elliott',
-      email: 'tonya.elliott@example.com',
-      dob: new Date(1954, 7, 17),
-    },
-    {
-      first: 'Maxine',
-      last: 'Turner',
-      email: 'maxine.turner@example.com',
-      dob: new Date(1961, 8, 19),
-    },
-    {
-      first: 'Max',
-      last: 'Headroom',
-      email: 'max.headroom@example.com',
-      dob: new Date(1984, 6, 1),
-    },
-  ];
+  import { 
+    Column,
+    Table,
+    Col, 
+    Row, 
+    Button, 
+    Card,
+    CardBody,
+    CardHeader,
+    CardTitle,
+    FormGroup,
+    Input,
+    Label
+  } from 'sveltestrap';
+  
+  let isAuthenticated = true;
+  let ROWS = []
+  
+  async function fetchData() {
+    if(localStorage.getItem("token") === null) {
+      isAuthenticated = false;
+    } else {
+      isAuthenticated = true;
+      const res = await fetch("http://localhost:3000/api/items", {
+        method: "GET",
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem("token")
+        }
+      });
+      const data = await res.json();
+      
+      if (res.ok) {
+        console.log(data)
+        ROWS = data;
+        return data;
+      } 
+      else {
+        throw new Error(data);
+      }
+    }
+  }
+  
 </script>
 
 <div class="card-container">
   <Card>
-
     <CardHeader>
       <CardTitle>Search our inventory!</CardTitle>
     </CardHeader>
     <CardBody>
       <FormGroup>
         <Label for="exampleSearch">What do you need?</Label>
-        <Input
+        <div class="card-search"> 
+          <Input
           type="search"
           name="search"
           id="exampleSearch"
           placeholder="A new KEA-Mug for my favorite teacher"
-        />
+          />
+        </div>
       </FormGroup>
+      <Button color="primary" on:click>Search</Button>
     </CardBody>
   </Card>
 </div>
+
+{#if isAuthenticated}
+{#await fetchData()}
+<p>loading</p>
+{:then items}
 <div class="table-container">
   <Table dark striped rows={ROWS} let:row>
     <Column header="itemName" width="6rem">
-      {row.first}
+      {row.name}
     </Column>
     <Column header="Description" width="16rem">
-      {row.last}
+      {row.description}
     </Column>
     <Column header="Price" width="2rem" class="text-right">
-      {row.dob.toDateString()}
+      {row.price},-
+    </Column>
+    <Column header="Quantity" width="2rem" class="text-right">
+      {row.quantity}x
+    </Column>
+    <Column width="2rem" class="text-right">
+      <Button>Add to cart</Button>
     </Column>
   </Table>
 </div>
+{/await}
+{:else}
+<h1>Login to view our products!</h1>
+{/if}
+
 
 <style>
   .table-container {
@@ -105,11 +100,15 @@
     width: 85%;
     margin-left: auto;
   }
-
+  
   .card-container {
     margin-top: 1%;
     width: 85%;
     margin-left: auto;
     background-color: #233d4d;
+  }
+  
+  .card-search {
+    width: 35%;
   }
 </style>
