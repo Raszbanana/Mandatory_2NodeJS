@@ -12,7 +12,6 @@ async function verifyUser(email, password) {
     .then((response) => response.json())
     .then((json) => {
       if (!json.token) {  
-        console.log(json)
         return json;
       } else {
         localStorage.setItem('token', json.token);

@@ -106,6 +106,17 @@ button:focus {
 	color: white;
 	border-radius: 30px;
 	margin-top: 0.5em;
+    margin-right: auto;
+	border-color: #2a695a;
+	text-shadow: 2px 2px #000000;
+	transition-duration: 0.4s;
+}
+.btn-secondary {
+	background-color: #ff0a0aa1;
+	font-size: 19px;
+	color: white;
+	border-radius: 30px;
+	margin-top: 0.5em;
 	margin-left: 60px;
 	border-color: #2a695a;
 	text-shadow: 2px 2px #000000;

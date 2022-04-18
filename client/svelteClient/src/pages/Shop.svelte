@@ -85,7 +85,7 @@
       {row.quantity}x
     </Column>
     <Column width="2rem" class="text-right">
-      <Button>Add to cart</Button>
+      <Button color="success">Add to cart</Button>
     </Column>
   </Table>
 </div>

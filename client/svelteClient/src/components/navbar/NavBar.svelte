@@ -8,31 +8,29 @@
     Form,
     FormGroup,
     Input,
-    Label,
     Col,
-    Row
+    Row,
   } from 'sveltestrap';
   import toastr from 'toastr';
   import verifyUser from '../../hooks/auth.js';
 
-  
-toastr.options = {
-  "closeButton": false,
-  "debug": false,
-  "newestOnTop": true,
-  "progressBar": false,
-  "positionClass": "toast-top-center",
-  "preventDuplicates": false,
-  "onclick": null,
-  "showDuration": "300",
-  "hideDuration": "1000",
-  "timeOut": "5000",
-  "extendedTimeOut": "1000",
-  "showEasing": "swing",
-  "hideEasing": "linear",
-  "showMethod": "fadeIn",
-  "hideMethod": "fadeOut"
-}
+  toastr.options = {
+    closeButton: false,
+    debug: false,
+    newestOnTop: true,
+    progressBar: false,
+    positionClass: 'toast-top-center',
+    preventDuplicates: false,
+    onclick: null,
+    showDuration: '300',
+    hideDuration: '1000',
+    timeOut: '2500',
+    extendedTimeOut: '1000',
+    showEasing: 'swing',
+    hideEasing: 'linear',
+    showMethod: 'fadeIn',
+    hideMethod: 'fadeOut',
+  };
 
   let email;
   let password;
@@ -40,9 +38,9 @@ toastr.options = {
   let open = false;
   const toggle = () => (open = !open);
   let logoSrc = 'images/logo2.png';
-  
+
   function checkAuth() {
-    if(localStorage.getItem("token") === null) {
+    if (localStorage.getItem('token') === null) {
       isAuthenticated = false;
       return false;
     } else {
@@ -50,28 +48,25 @@ toastr.options = {
       return true;
     }
   }
-  
+
   function signOut() {
-    localStorage.removeItem("token");
+    localStorage.removeItem('token');
     isAuthenticated = false;
-    toastr.warning('Signed out')
+    toastr.warning('Signed out');
   }
   async function login(event) {
     event.preventDefault();
-    await verifyUser(email, password)
-    .then(result => {
-      setTimeout(function() { 
-        if(localStorage.getItem("token") !== null) {
+    await verifyUser(email, password).then((result) => {
+      setTimeout(function () {
+        if (localStorage.getItem('token') !== null) {
           isAuthenticated = true;
-          toastr.success('Login successfull!', 'Success')
-          toggle()
-        }
-        else toastr.error('Wrong credentials');
-      }, 100)
-    })
+          toastr.success('Login successfull!', 'Success');
+          toggle();
+        } else toastr.error('Wrong credentials');
+      }, 100);
+    });
   }
   checkAuth();
-  
 </script>
 
 <div class="nav-header keaShop-text">
@@ -90,16 +85,16 @@ toastr.options = {
           <div>
             <!-- Open modal -->
             {#await login}
-            <div>Test</div>
+              <div>Test</div>
             {:then response}
-            {#if isAuthenticated}
-            <Button color="primary" on:click={signOut}>signOut</Button>
-            {/if}
+              {#if isAuthenticated}
+                <Button color="primary" on:click={signOut}>signOut</Button>
+              {/if}
             {:catch error}
-            <div>Something went wrong</div>
+              <div>Something went wrong</div>
             {/await}
             {#if !isAuthenticated}
-            <button on:click={toggle}>Login</button>
+              <button on:click={toggle}>Login</button>
             {/if}
             <Modal isOpen={open} {toggle}>
               <ModalHeader {toggle}>
@@ -107,28 +102,33 @@ toastr.options = {
               </ModalHeader>
               <Form>
                 <ModalBody>
-                  <h1 class="keaShop-text">Please enter your credentials to login</h1>
+                  <h1 class="keaShop-text">
+                    Please enter your credentials to login
+                  </h1>
                   <FormGroup floating label="Email">
-                    <Input bind:value={email}
-                    type="email"
-                    name="email"
-                    placeholder="johndoe123@gmail.com"
+                    <Input
+                      bind:value={email}
+                      type="email"
+                      name="email"
+                      placeholder="johndoe123@gmail.com"
                     />
                   </FormGroup>
-                  
+
                   <FormGroup floating label="Password">
                     <Input
-                    bind:value={password}
-                    type="password"
-                    name="password"
-                    placeholder="password placeholder"
+                      bind:value={password}
+                      type="password"
+                      name="password"
+                      placeholder="password placeholder"
                     />
                   </FormGroup>
                 </ModalBody>
                 <ModalFooter>
                   <Button color="primary" on:click={login}>Login</Button>
+                  <a href="#/signup" class="modal-signup" on:click={toggle}
+                    >Signup
+                  </a>
                   <Button color="secondary" on:click={toggle}>Cancel</Button>
-                  <Button color="secondary" on:click={toggle}>Sign up?</Button>
                 </ModalFooter>
               </Form>
             </Modal>
@@ -178,7 +178,7 @@ toastr.options = {
     margin-left: 3.5em;
     text-shadow: 2px 2px #000000;
   }
-  
+
   .logo-img {
     height: 50px;
     width: 55px;
@@ -187,7 +187,23 @@ toastr.options = {
     margin-top: 2px;
     border-radius: 10px;
   }
-  
+
+  .modal-signup {
+    color: white;
+    background-color: #287034;
+    font-size: 19px;
+    color: white;
+    border-radius: 30px;
+    margin-top: 0.5em;
+    margin-right: auto;
+    margin-left: auto;
+    border-color: #2a695a;
+    text-shadow: 2px 2px #000000;
+    transition-duration: 0.4s;
+    width: 72px;
+    height: 32px;
+    text-align: center;
+  }
   button {
     background-color: #2a695a;
     font-size: 19px;
@@ -202,7 +218,7 @@ toastr.options = {
   button:hover {
     background-color: #29998c;
   }
-  
+
   h1,
   span {
     text-align: center;
