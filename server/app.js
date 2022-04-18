@@ -3,7 +3,7 @@ import cors from 'cors'
 import verifyToken from './services/authorizationService.js';
 import verifyLogin from './services/authenticationService.js';
 import signup from './services/signupService.js'
-
+import sendMail from './services/nodemailer.js'
 // import path from 'path';
 import jwt from 'jsonwebtoken';
 import itemsRouter from './routers/itemsRouter.js';
@@ -12,6 +12,12 @@ app.use(express.json());
 app.use(cors())
 
 app.post('/api/signup', signup, (req, res) => {
+  sendMail(req.body.email).then(result => {
+      console.log(result)          
+    })
+    .catch(error => {
+        console.log(error.message)
+    })
   res.send({message: "Signup successful"})
 }) 
 

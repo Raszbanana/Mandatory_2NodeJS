@@ -1,14 +1,12 @@
-
 import nodemailer from 'nodemailer';
 import { google } from 'googleapis';
+import dotenv from 'dotenv';
+dotenv.config();
 
-
-const CLIENT_ID =
-  '163317577937-is6f9om56to5rqmgoma82ip4u08i1h3m.apps.googleusercontent.com';
-const CLIENT_SECRET = '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';
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = 'https://developers.google.com/oauthplayground';
-const REFRESH_TOKEN =
-'1//04lEaPJLf1DF0CgYIARAAGAQSNwF-L9Ir8C22TM8hN-fOi20kbdNbH9JHCuH-P-fep7NStStoMF-5Mt8-637WrT8n0x8u1JousTw';
+const REFRESH_TOKEN = process.env.REFRESH_TOKEN;
 
 const oAuth2Client = new google.auth.OAuth2(
   CLIENT_ID,
@@ -17,13 +15,16 @@ const oAuth2Client = new google.auth.OAuth2(
 );
 oAuth2Client.setCredentials({ refreshToken: REFRESH_TOKEN });
 
-async function sendMail() {
+async function sendMail(email) {
   try {
     // TO DO, fix fetching accessToken, for some reason i cannot get the access token,
     // but everything works if i hard code it in?
+    // The below method is meant to fetch a new accessToken using the refreshToken i was given, however it doesn't seem to work.
+    // Which means i have to manually put in the accessToken every hour..
+    // I know i should've opted for something else than gmail, but i wanted to try because i am foolish
     // const access = await oAuth2Client.getAccessToken();
 
-    const access = 'ya29.A0ARrdaM-4RL0yNjEwP4ocXOmXPIJeU_Gud5DAxCGs975jMmBLEetqomfbYEM36VjfQKYs04-2BVTwhNPp7Es-96nQU5-6LYFWT0uknoUf3rMXKRstMrpzJQ1bgyPGwitEn9vt4w_YnLh7VfMWoJnSNj5T6E49'
+    const access = 'ya29.A0ARrdaM-WiWADSchOjbmZoSM9niiLpH14fywmEsY0wr-QYxvP84Ha9oPHWuKc1aP5XeY1ti_x4QzoMuerl-KXC9cdF-fui408Jgo2gsB-BdyDyMt3kftvNxHzd_widgSqr-6ouYrSlH9EDiJ7sbsSeaoM3A6m'
     const transport = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -37,10 +38,10 @@ async function sendMail() {
     });
     const mailOptions = {
       from: 'TEST<3 <bigboimailman@gmail.com>',
-      to: 'niko.hochloff@gmail.com',
-      subject: 'hello from api',
-      text: 'Hello from api <3',
-      html: '<h1>Boi</h1>',
+      to: email,
+      subject: 'Signup Success!',
+      text: 'Welcome to KeaShop',
+      html: '<h1>Welcome to KeaShop. Whatever your heart desires</h1>',
     };
 
     const result = await transport.sendMail(mailOptions);
@@ -49,10 +50,13 @@ async function sendMail() {
     return error;
   }
 }
+// Test
 
-sendMail().then(result => {
-  console.log(result)          
-})
-.catch(error => {
-    console.log(error.message)
-})
+// sendMail('niko.lenander@gmail.com').then(result => {
+//   console.log(result)          
+// })
+// .catch(error => {
+//     console.log(error.message)
+// })
+
+export default sendMail;

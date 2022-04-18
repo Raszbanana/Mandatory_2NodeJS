@@ -19,7 +19,7 @@ function signup(req, res, next) {
       .then((user) => {
         userMail = user.email;
         if (userMail === req.body.email) {
-          res.send({ message: 'User already exists' });
+          res.send({ message: 'User already exists', status: 1 });
         }
       })
       .catch((error) => {
