@@ -11,15 +11,17 @@ async function verifyUser(email, password) {
   })
     .then((response) => response.json())
     .then((json) => {
-      if (!json.token) {  
+      if (!json.token) {
         return json;
       } else {
         localStorage.setItem('token', json.token);
         const token = localStorage.getItem('token');
         return token;
       }
-    }).catch((error) => {console.log(error)});
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
 
 export default verifyUser;
-

@@ -5,7 +5,7 @@ const itemsRouter = Router();
 
 itemsRouter.get('/api/items', async (req, res) => {
   const items = await db.all('SELECT * FROM items;');
-  console.log("Items were sent!")
+  console.log('Items were sent!');
   res.send(items);
 });
 

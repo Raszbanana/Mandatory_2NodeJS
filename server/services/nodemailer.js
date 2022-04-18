@@ -24,7 +24,8 @@ async function sendMail(email) {
     // I know i should've opted for something else than gmail, but i wanted to try because i am foolish
     // const access = await oAuth2Client.getAccessToken();
 
-    const access = 'ya29.A0ARrdaM-WiWADSchOjbmZoSM9niiLpH14fywmEsY0wr-QYxvP84Ha9oPHWuKc1aP5XeY1ti_x4QzoMuerl-KXC9cdF-fui408Jgo2gsB-BdyDyMt3kftvNxHzd_widgSqr-6ouYrSlH9EDiJ7sbsSeaoM3A6m'
+    const access =
+      'ya29.A0ARrdaM-WiWADSchOjbmZoSM9niiLpH14fywmEsY0wr-QYxvP84Ha9oPHWuKc1aP5XeY1ti_x4QzoMuerl-KXC9cdF-fui408Jgo2gsB-BdyDyMt3kftvNxHzd_widgSqr-6ouYrSlH9EDiJ7sbsSeaoM3A6m';
     const transport = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -53,7 +54,7 @@ async function sendMail(email) {
 // Test
 
 // sendMail('niko.lenander@gmail.com').then(result => {
-//   console.log(result)          
+//   console.log(result)
 // })
 // .catch(error => {
 //     console.log(error.message)
