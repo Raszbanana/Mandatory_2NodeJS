@@ -8,7 +8,6 @@
   import { Container } from 'sveltestrap';
   import Router from 'svelte-spa-router';
 </script>
-
 <Container fluid>
   <NavBar />
   <Footer/>
