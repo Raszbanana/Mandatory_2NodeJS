@@ -6,28 +6,6 @@
   let password;
   let isSigned = false;
 
-  toastr.options = {
-    closeButton: false,
-    debug: false,
-    newestOnTop: true,
-    progressBar: false,
-    positionClass: 'toast-top-center',
-    preventDuplicates: false,
-    onclick: null,
-    showDuration: '300',
-    hideDuration: '1000',
-    timeOut: '2500',
-    extendedTimeOut: '1000',
-    showEasing: 'swing',
-    hideEasing: 'linear',
-    showMethod: 'fadeIn',
-    hideMethod: 'fadeOut',
-  };
-
-  async function testSignup(event) {
-    event.preventDefault();
-    await signup(name, email, password).then((result) => {});
-  }
   async function signup(name, email, password) {
     fetch('http://localhost:3000/api/signup', {
       method: 'POST',
@@ -54,6 +32,14 @@
       .catch((error) => {
         console.log(error);
       });
+  }
+  async function applySignup(event) {
+    event.preventDefault();
+    if (email.length == 0 || password.length == 0 || name.length == 0) {
+      toastr.warning('Please type in valid signup information');
+    } else {
+      await signup(name, email, password).then((result) => {});
+    }
   }
 </script>
 
@@ -89,7 +75,7 @@
           placeholder="password placeholder"
         />
       </FormGroup>
-      <Button color="primary" on:click={testSignup}>Signup</Button>
+      <Button color="primary" on:click={applySignup}>Signup</Button>
     </Form>
   </div>
 {/if}
