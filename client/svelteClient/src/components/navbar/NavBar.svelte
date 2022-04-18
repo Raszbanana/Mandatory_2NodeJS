@@ -1,5 +1,4 @@
 <script>
-
   import {
     Button,
     Modal,
@@ -13,7 +12,7 @@
     Col,
     Row
   } from 'sveltestrap';
-
+  import toastr from 'toastr';
   import verifyUser from '../../hooks/auth.js';
   
   let email;
@@ -37,19 +36,13 @@
   }
   async function login(event) {
       event.preventDefault();
-      await verifyUser(email, password)
+      await verifyUser(email, password);
       isAuthenticated = true;
-      toast.push('Success!', {
-  theme: {
-    '--toastBackground': '#48BB78',
-    '--toastBarBackground': '#2F855A'
+      toastr.success('Login successfull!')
+      
   }
-})
-  }
-
   checkAuth();
-    
-    
+
   </script>
   
   <div class="nav-header keaShop-text">
@@ -73,11 +66,11 @@
               <button on:click={toggle}>Login</button>
               <Modal isOpen={open} {toggle}>
                 <ModalHeader {toggle}>
-                  <span>Authentication </span>
+                  <span class="keaShop-text">Authentication </span>
                 </ModalHeader>
                 <Form>
                   <ModalBody>
-                    <h1>Please enter your credentials to login</h1>
+                    <h1 class="keaShop-text">Please enter your credentials to login</h1>
                     <FormGroup floating label="Email">
                       <Input bind:value={email}
                       type="email"

@@ -13,15 +13,13 @@ async function verifyUser(email, password) {
     .then((json) => {
       if (!json.token) {  
         console.log(json)
-
+        return json;
       } else {
-        console.log(json.auth)
         localStorage.setItem('token', json.token);
         const token = localStorage.getItem('token');
-        console.log(token)
-        
+        return token;
       }
-    });
+    }).catch((error) => {console.log(error)});
 }
 
 export default verifyUser;

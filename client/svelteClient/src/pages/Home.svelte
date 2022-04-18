@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Image } from 'sveltestrap';
   </script>
-  <h1>Welcome to KeaShop, please sign in to continue </h1>
+  <h1>Welcome to KeaShop</h1>
 <Image fluid alt="Landscape" src="https://picsum.photos/id/123/2000/400.jpg" />
 
 
