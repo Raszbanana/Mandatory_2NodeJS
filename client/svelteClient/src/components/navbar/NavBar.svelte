@@ -1,5 +1,5 @@
 <script>
-  import { Col, Row } from 'sveltestrap';
+
   import {
     Button,
     Modal,
@@ -9,8 +9,11 @@
     Form,
     FormGroup,
     Input,
-    Label
+    Label,
+    Col,
+    Row
   } from 'sveltestrap';
+
   import verifyUser from '../../hooks/auth.js';
   
   let email;
@@ -36,9 +39,14 @@
       event.preventDefault();
       await verifyUser(email, password)
       isAuthenticated = true;
-      
+      toast.push('Success!', {
+  theme: {
+    '--toastBackground': '#48BB78',
+    '--toastBarBackground': '#2F855A'
   }
-  
+})
+  }
+
   checkAuth();
     
     
@@ -48,11 +56,10 @@
     <Row>
       <Col>
         <div class="logo-container">
-          <a href="/#/">
             <img src={logoSrc} class="logo-img" alt="shop-logo" />
-          </a>
-          
-          <span class="logo-text">KeaShop</span>
+          <a href="/#/">
+          <span class="logo-text keaShop-text">KeaShop</span>
+        </a>
         </div>
       </Col>
       <Col>
@@ -100,8 +107,8 @@
             </div>
           </Col>
           <Col>
-            <a href="/#/categories">
-              <div class="nav-header-panel keaShop-text">Categories</div>
+            <a href="/#/shop">
+              <div class="nav-header-panel keaShop-text">Shop</div>
             </a>
           </Col>
           <Col>

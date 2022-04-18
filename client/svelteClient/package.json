@@ -21,6 +21,7 @@
     "sirv-cli": "^2.0.0",
     "svelte-router-spa": "^6.0.3",
     "svelte-spa-router": "^3.2.0",
-    "sveltestrap": "^5.9.0"
+    "sveltestrap": "^5.9.0",
+    "toastr": "^2.1.4"
   }
 }
