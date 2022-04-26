@@ -15,5 +15,6 @@ Welcome to my project, this is merely meant to be a brief read. Mostly also for 
 - Refresh Shop page upon user login (and signout?) It is a problem because if the user opens the login modal and logs in from the shop page, he/she will have to refresh it to run the fetch items request
 - Fix possible SQL injection exploits in the database queries
 - Add authLimiter to login requests
+- If a user tries to send requests to the API without a token, the request will just keep processing, need to implement a status code responds that says no authorization 
 
 
